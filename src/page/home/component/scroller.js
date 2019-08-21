@@ -20,6 +20,7 @@ export default class Swipers extends Component{
                 horizontal={true} // 设置横向滚动
                 showsHorizontalScrollIndicator={false} // 当此属性为true的时候，显示一个水平方向的滚动条
                 automaticallyAdjustContentInsets={false}
+                onMomentumScrollEnd={(e)=>console.log(e)}
                 style={styles.wrapper}
                 >
                 {

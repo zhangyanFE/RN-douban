@@ -20,7 +20,7 @@ import SwiperList from './component/swiperList';
 import Scroller from './component/scroller';
 import ScrollerBanner from './component/scrollerBanner';
 
-export default class Home extends Component {
+export default class Home extends Component {  
   constructor(props) {
     super(props)
 
@@ -44,7 +44,6 @@ export default class Home extends Component {
     return fetch('https://m.douban.com/rexxar/api/v2/niffler/modules?for_mobile=1')
       .then((res) => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
           isLoading: false,
           modules: data.modules,
@@ -56,6 +55,7 @@ export default class Home extends Component {
 
   // 头部组件
   _createListHeader(modules) {
+    const { navigate } = this.props.navigation;
     return (
         <View>
           {
@@ -65,7 +65,7 @@ export default class Home extends Component {
                 case 'banner':
                   return (
                       <View style={styles.bannerBox} key={index}>
-                        <Swipers list={item.items} />
+                        <Swipers list={item.items} navigate={navigate} />
                       </View>
                   );
                 case 'collection':
@@ -151,13 +151,15 @@ export default class Home extends Component {
     return (
       <View>
         <FlatList
+          scrollToIndex={1}
           ListHeaderComponent={() => this._createListHeader(modules)}
           refreshing={isRefresh}
           // onRefresh={() => this._onRefresh()}
           refreshControl={
             <RefreshControl
               title={'下拉刷新'}
-              color={'#f3f3f3'}
+              colors={['#999']}
+              tintColor={'#999'}
               refreshing={isRefresh}
               onRefresh={
                 () => {

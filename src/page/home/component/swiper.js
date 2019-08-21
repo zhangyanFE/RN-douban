@@ -3,6 +3,7 @@ import {
     StyleSheet,
     View,
     Image,
+    Button,
     TouchableOpacity
 } from 'react-native';
 import Swiper from 'react-native-swiper';
@@ -12,8 +13,7 @@ export default class Swipers extends Component{
         super(props)
     }
     render() {
-        const { list } = this.props;
-
+        const { list, navigate } = this.props;
         return (
             <Swiper 
                 style={styles.wrapper} 
@@ -23,7 +23,9 @@ export default class Swipers extends Component{
                     list.map((item, index) => {
                         return (
                             <View key={index}>
-                              <TouchableOpacity activeOpacity={0.9}>
+                              <TouchableOpacity activeOpacity={0.9} onPress={()=> navigate('SubScreen', {
+                                  item
+                              })}>
                                 <Image style={styles.banner} source={{uri: item.cover_url}} />
                               </TouchableOpacity>
                             </View>
